@@ -1,3 +1,7 @@
 node_modules
 package-lock.json
 src/.env
+.env
+/src/generated/prisma
+prisma/migrations
+.DS_store
