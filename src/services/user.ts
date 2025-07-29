@@ -3,6 +3,7 @@ import { getJwtToken } from "../utils/create_jwt_token";
 import { hashPassword } from "../utils/hash_password";
 import { validatePassword } from "../utils/validate_password";
 import { UUID } from "crypto";
+import jwt from 'jsonwebtoken'
 
 export interface userInterface{
     fullName: string
@@ -50,6 +51,10 @@ export class UserService{
         if(user.password != incomingHashedPassword) throw new Error("Incorrect Password")
 
         return getJwtToken({id: user.id, fullName: user.fullName, email: user.email})
+    }
+
+    public static async decodeToken(token: string){
+        return jwt.verify(token, process.env.JWT_SECRET || "abcd")
     }
 }
 
